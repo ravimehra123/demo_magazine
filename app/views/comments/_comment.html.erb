@@ -1,0 +1,21 @@
+<%= div_for comment do %>
+
+<h3>
+<%= comment.name %> &lt;<%= comment.email %>&gt;:
+<% if @article.owned_by? current_user %>
+<span class='actions'>
+<%= link_to 'Delete', article_comment_path(:article_id => @article,
+:id => comment), confirm: 'Are you sure?', method: :delete , remote: true %>
+</span>
+<% end %>
+</h3>
+<%= comment.body %>
+
+    <p><%= link_to 'Add a Reply', reply_path(@article,:parent_id => comment.id) %></p>
+    <% unless comment.comments.empty? %>
+      <ul class="nested_comment">
+        <%= render comment.comments %>
+      </ul>
+    <% end %>
+
+<% end %> 
