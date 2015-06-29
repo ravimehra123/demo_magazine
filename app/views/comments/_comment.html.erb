@@ -2,9 +2,9 @@
 
 <h3>
 <%= comment.name %> &lt;<%= comment.email %>&gt;:
-<% if @article.owned_by? current_user %>
+<% if @article.owned_by? current_user and comment.comments.empty? %>
 <span class='actions'>
-<%= link_to 'Delete', article_comment_path(:article_id => @article,
+<%#= link_to 'Delete', article_comment_path(:article_id => @article,
 :id => comment), confirm: 'Are you sure?', method: :delete , remote: true %>
 </span>
 <% end %>

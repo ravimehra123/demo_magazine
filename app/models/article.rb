@@ -2,7 +2,7 @@ class Article < ActiveRecord::Base
 	validates_presence_of :title,:body
 	belongs_to :user
 	has_and_belongs_to_many :categories
-	has_many :comments
+	has_many :comments, -> {where("comment_id == ?",0)}
 	scope :published, lambda { where("articles.published_at IS NOT NULL") }
 	scope :draft, lambda { where("articles.published_at IS NULL") }
 	scope :recent, lambda { published.where("articles.published_at > ?",
